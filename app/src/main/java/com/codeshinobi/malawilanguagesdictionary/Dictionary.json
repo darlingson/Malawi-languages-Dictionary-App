@@ -1,0 +1,223 @@
+{
+  "languages": {
+    "lomwe": {
+      "words": [
+        {
+          "word": "waka",
+          "meaning": "mine",
+          "example": "I mined the gold"
+        },
+        {
+          "word": "epewe",
+          "meaning": "rudeness",
+          "example": "I am very rude"
+        },
+        {
+          "word": "mino",
+          "meaning": "water jars",
+          "example": "I have a lot of water jars"
+        },
+        {
+          "word": "muwono",
+          "meaning": "arm",
+          "example": "I have an arm"
+        },
+        {
+          "word": "muno",
+          "meaning": "water jar",
+          "example": "I have a water jar"
+        },
+        {
+          "word": "mukhwaaka",
+          "meaning": "my friend",
+          "example": "My friend is my best friend"
+        },
+        {
+          "word": "oveetha",
+          "meaning": "to winnow",
+          "example": "I winnowed the water"
+        },
+        {
+          "word": "mwiinyu",
+          "meaning": "salt",
+          "example": "I need salt"
+        },
+        {
+          "word": "moowe",
+          "meaning": "mother",
+          "example": "My mother is my mother"
+        },
+        {
+          "word": "kuukuru",
+          "meaning": "owl",
+          "example": "I saw an owl"
+        },
+        {
+          "word": "weella",
+          "meaning": "to be clear",
+          "example": "I am clear"
+        },
+        {
+          "word": "miino",
+          "meaning": "tooth",
+          "example": "I have a tooth"
+        },
+        {
+          "word": "othonya",
+          "meaning": "to drip",
+          "example": "I dripped the water"
+        },
+        {
+          "word": "othoonya",
+          "meaning": "to point out",
+          "example": "I pointed out the water"
+        },
+        {
+          "word": "otulla",
+          "meaning": "to cut grass",
+          "example": "I cut the grass"
+        },
+        {
+          "word": "otuulla",
+          "meaning": "to make a hole",
+          "example": "I made a hole"
+        },
+        {
+          "word": "o’aba",
+          "meaning": "to bathe",
+          "example": "I bathed"
+        },
+        {
+          "word": "o’abela",
+          "meaning": "to swim",
+          "example": "I swam"
+        },
+        {
+          "word": "o’ada",
+          "meaning": "to harvest",
+          "example": "I harvested the water"
+        },
+        {
+          "word": "o’ala",
+          "meaning": "to remain",
+          "example": "I remain"
+        },
+        {
+          "word": "o’ara",
+          "meaning": "to follow",
+          "example": "I follow"
+        }
+      ]
+    },
+    "tumbuka": {
+      "words": [
+        {
+          "word": "Pachoko",
+          "meaning": "small",
+          "example": "I am small"
+        },
+        {
+          "word": "Chikulu",
+          "meaning": "big",
+          "example": "I am big"
+        },
+        {
+          "word": "chiwisi",
+          "meaning": "fresh",
+          "example": "I am fresh"
+        },
+        {
+          "word": "Chasono",
+          "meaning": "new",
+          "example": "I am new"
+        },
+        {
+          "word": "Chakale",
+          "meaning": "old",
+          "example": "I am old"
+        },
+        {
+          "word": "Chakutowa",
+          "meaning": "beautiful",
+          "example": "I am beautiful"
+        },
+        {
+          "word": "Chakofya",
+          "meaning": "dangerous",
+          "example": "I am dangerous"
+        },
+        {
+          "word": "Pachokopachoko",
+          "meaning": "slowly",
+          "example": "I am slowly"
+        },
+        {
+          "word": "Mwaluwiro",
+          "meaning": "fast",
+          "example": "I am fast"
+        },
+        {
+          "word": "Chifipa",
+          "meaning": "black",
+          "example": "I am black"
+        },
+        {
+          "word": "Chituwa",
+          "meaning": "white",
+          "example": "I am white"
+        },
+        {
+          "word": "Biriwiri",
+          "meaning": "green",
+          "example": "I am green"
+        },
+        {
+          "word": "Chotu",
+          "meaning": "grey",
+          "example": "I am grey"
+        },
+        {
+          "word": "Uswesi",
+          "meaning": "red",
+          "example": "I am red"
+        },
+        {
+          "word": "Khofi",
+          "meaning": "pink",
+          "example": "I am pink"
+        },
+        {
+          "word": "Pachanya pa",
+          "meaning": "on top of",
+          "example": "I am on top of"
+        },
+        {
+          "word": "pasi",
+          "meaning": "at the bottom of",
+          "example": "I am at the bottom of"
+        },
+        {
+          "word": "pawalo",
+          "meaning": "outside",
+          "example": "I am outside"
+        },
+        {
+          "word": "pakati",
+          "meaning": "in the middle of",
+          "example": "I am in the middle of"
+        },
+        {
+          "word": "pathanzi",
+          "meaning": "in front",
+          "example": "I am in front"
+        },
+        {
+          "word": "Pakwamba",
+          "meaning": "first",
+          "example": "I am first"
+        }
+      ]
+    },
+    "chichewa": {}
+  }
+}

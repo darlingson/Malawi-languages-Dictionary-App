@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.codeshinobi.malawilanguagesdictionary" />
+                  <option name="mobileSdkAppId" value="1:1013736101718:android:688699023a053292c8a8f7" />
+                  <option name="projectId" value="malawilanguagesdictionary" />
+                  <option name="projectNumber" value="1013736101718" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
