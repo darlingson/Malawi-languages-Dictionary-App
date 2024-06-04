@@ -24,7 +24,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.codeshinobi.malawilanguagesdictionary.ui.components.TabBarItem
 import com.codeshinobi.malawilanguagesdictionary.ui.components.TabView
+import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.dictionariesTab
 import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.homeTab
+import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.settingsTab
 import com.codeshinobi.malawilanguagesdictionary.ui.theme.MalawiLanguagesDictionaryTheme
 import com.google.firebase.database.FirebaseDatabase
 
@@ -33,12 +35,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val homeTab = TabBarItem(title = "Home", selectedIcon = Icons.Filled.Home, unselectedIcon = Icons.Outlined.Home)
-            val alertsTab = TabBarItem(title = "Alerts", selectedIcon = Icons.Filled.Notifications, unselectedIcon = Icons.Outlined.Notifications)
+            val dictionairesTab = TabBarItem(title = "Dictionary", selectedIcon = Icons.Filled.Notifications, unselectedIcon = Icons.Outlined.Notifications)
             val settingsTab = TabBarItem(title = "Settings", selectedIcon = Icons.Filled.Settings, unselectedIcon = Icons.Outlined.Settings)
 
 
             // creating a list of all the tabs
-            val tabBarItems = listOf(homeTab, alertsTab, settingsTab)
+            val tabBarItems = listOf(homeTab, dictionairesTab, settingsTab)
 
             // creating our navController
             val navController = rememberNavController()
@@ -59,11 +61,17 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier.padding(innerPadding)
                                 )
                             }
-                            composable(alertsTab.title) {
-                                Text(alertsTab.title)
+                            composable(dictionairesTab.title) {
+                                dictionariesTab(
+                                    navController= navController,
+                                    modifier = Modifier.padding(innerPadding)
+                                )
                             }
                             composable(settingsTab.title) {
-                                Text(settingsTab.title)
+                                settingsTab(
+                                    navController= navController,
+                                    modifier = Modifier.padding(innerPadding)
+                                )
                             }
                         }
                     }
