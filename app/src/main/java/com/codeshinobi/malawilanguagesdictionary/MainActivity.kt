@@ -58,19 +58,22 @@ class MainActivity : ComponentActivity() {
                             composable(homeTab.title) {
                                 homeTab(
                                     navController= navController,
-                                    modifier = Modifier.padding(innerPadding)
+                                    modifier = Modifier.padding(innerPadding),
+                                    databaseReference = databaseReference
                                 )
                             }
                             composable(dictionairesTab.title) {
                                 dictionariesTab(
                                     navController= navController,
-                                    modifier = Modifier.padding(innerPadding)
+                                    modifier = Modifier.padding(innerPadding),
+                                    databaseReference = databaseReference
                                 )
                             }
                             composable(settingsTab.title) {
                                 settingsTab(
                                     navController= navController,
-                                    modifier = Modifier.padding(innerPadding)
+                                    modifier = Modifier.padding(innerPadding),
+                                    databaseReference = databaseReference
                                 )
                             }
                         }
