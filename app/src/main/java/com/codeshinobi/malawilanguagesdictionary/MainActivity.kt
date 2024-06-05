@@ -1,6 +1,7 @@
 package com.codeshinobi.malawilanguagesdictionary
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,6 +53,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val firebaseDatabase = FirebaseDatabase.getInstance();
                     val databaseReference = firebaseDatabase.getReference("dictionary");
+                    Log.d("MainActivity", "Database reference: ${databaseReference}")
 //                    Greeting("Android")
                     Scaffold(bottomBar = { TabView(tabBarItems, navController) }) { innerPadding ->
                         NavHost(navController = navController, startDestination = homeTab.title) {
