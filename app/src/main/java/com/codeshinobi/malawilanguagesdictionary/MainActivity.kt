@@ -25,11 +25,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.codeshinobi.malawilanguagesdictionary.ui.components.TabBarItem
 import com.codeshinobi.malawilanguagesdictionary.ui.components.TabView
+import com.codeshinobi.malawilanguagesdictionary.ui.components.WordDetailScreen
+import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.Word
 import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.dictionariesTab
 import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.homeTab
 import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.settingsTab
 import com.codeshinobi.malawilanguagesdictionary.ui.theme.MalawiLanguagesDictionaryTheme
 import com.google.firebase.database.FirebaseDatabase
+import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +80,11 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier.padding(innerPadding),
                                     databaseReference = databaseReference
                                 )
+                            }
+                            composable("wordDetail/{word}") { backStackEntry ->
+                                val wordJson = backStackEntry.arguments?.getString("word")
+                                val word = Gson().fromJson(wordJson, Word::class.java)
+                                WordDetailScreen(navController = navController, word = word)
                             }
                         }
                     }

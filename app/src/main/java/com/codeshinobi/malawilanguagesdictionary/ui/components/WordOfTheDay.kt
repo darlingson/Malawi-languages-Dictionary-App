@@ -9,7 +9,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.codeshinobi.malawilanguagesdictionary.ui.components.tabs.Word
+import com.google.gson.Gson
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WordOfTheDay(
     navController: NavController,
@@ -20,7 +22,12 @@ fun WordOfTheDay(
             .fillMaxWidth()
             .padding(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        shape = MaterialTheme.shapes.medium
+        shape = MaterialTheme.shapes.medium,
+        onClick = {
+            val jsonString = Gson().toJson(word)
+            navController.navigate("wordDetail/$jsonString")
+        }
+
     ) {
         Column(
             modifier = Modifier
@@ -41,6 +48,7 @@ fun WordOfTheDay(
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
+
         }
     }
 }
