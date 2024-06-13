@@ -1,5 +1,6 @@
 package com.codeshinobi.malawilanguagesdictionary.ui.components.tabs
 
+import WordOfTheDay
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -77,10 +78,11 @@ fun homeTab(navController: NavController, modifier: Modifier, databaseReference:
                 }
             } else {
                 wordOfTheDay?.let { word ->
-                    Text(text = "Word of the Day: ${word.word}")
-                    Text(text = "Meaning: ${word.meaning}")
-                    Text(text = "Example: ${word.example}")
-                    Spacer(modifier = Modifier.height(16.dp))
+//                    Text(text = "Word of the Day: ${word.word}")
+//                    Text(text = "Meaning: ${word.meaning}")
+//                    Text(text = "Example: ${word.example}")
+//                    Spacer(modifier = Modifier.height(16.dp))
+                    WordOfTheDay(navController, word)
                 }
             }
         }
