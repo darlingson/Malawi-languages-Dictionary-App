@@ -116,11 +116,30 @@ data class Word(
 data class Language(
     val words: List<Word> = emptyList()
 )
+//suspend fun searchDatabase(databaseReference: DatabaseReference, query: String, onResult: (List<Word>) -> Unit) {
+//    val language = listOf("chichewa", "lomwe", "tumbuka")[Random.nextInt(3)]
+//    val wordsSnapshot = databaseReference.child("languages").child(language).child("words")
+//        .orderByChild("word").equalTo(query).get().await()
+//    Log.d("searchDatabase", "Found ${wordsSnapshot.childrenCount} words for language $language")
+//    val words = wordsSnapshot.children.mapNotNull { it.getValue(Word::class.java) }
+//    onResult(words)
+//}
 suspend fun searchDatabase(databaseReference: DatabaseReference, query: String, onResult: (List<Word>) -> Unit) {
-    val language = listOf("chichewa", "lomwe", "tumbuka")[Random.nextInt(3)]
-    val wordsSnapshot = databaseReference.child("languages").child(language).child("words")
-        .orderByChild("word").equalTo(query).get().await()
-    Log.d("searchDatabase", "Found ${wordsSnapshot.childrenCount} words for language $language")
-    val words = wordsSnapshot.children.mapNotNull { it.getValue(Word::class.java) }
-    onResult(words)
+    val languages = listOf("chichewa", "lomwe", "tumbuka")
+
+    val allWords = mutableListOf<Word>()
+
+    languages.forEach { language ->
+        val wordsSnapshot = databaseReference
+            .child("languages").child(language).child("words")
+            .orderByChild("word")
+            .startAt(query)
+            .endAt(query + "\uf8ff")
+            .get().await()
+
+        val words = wordsSnapshot.children.mapNotNull { it.getValue(Word::class.java) }
+        allWords.addAll(words)
+    }
+
+    onResult(allWords.take(10))
 }
