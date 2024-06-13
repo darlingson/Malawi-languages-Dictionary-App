@@ -31,15 +31,15 @@ import kotlin.random.Random
 @Composable
 fun homeTab(navController: NavController, modifier: Modifier, databaseReference: DatabaseReference) {
     var wordOfTheDay by remember { mutableStateOf<Word?>(null) }
-//    var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
-//    var searchResults by remember { mutableStateOf<List<Word>>(emptyList()) }
-
     var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
     var searchResults by remember { mutableStateOf(emptyList<Word>()) }
+    var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
+        isLoading = true
         wordOfTheDay = getRandomWord(databaseReference)
+        isLoading = false
     }
 
     Column(
@@ -47,20 +47,15 @@ fun homeTab(navController: NavController, modifier: Modifier, databaseReference:
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        wordOfTheDay?.let { word ->
-            Text(text = "Word of the Day: ${word.word}")
-            Text(text = "Meaning: ${word.meaning}")
-            Text(text = "Example: ${word.example}")
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { newQuery ->
                 searchQuery = newQuery
                 coroutineScope.launch {
+                    isLoading = true
                     searchDatabase(databaseReference, searchQuery.text) { results ->
                         searchResults = results
+                        isLoading = false
                     }
                 }
             },
@@ -70,14 +65,28 @@ fun homeTab(navController: NavController, modifier: Modifier, databaseReference:
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        searchResults.forEach { word ->
-            Text(text = word.word)
-            Text(text = word.meaning)
-            Text(text = word.example)
-            Spacer(modifier = Modifier.height(8.dp))
+        if (isLoading) {
+            Text(text = "Loading...")
+        } else {
+            if (searchResults.isNotEmpty()) {
+                searchResults.forEach { word ->
+                    Text(text = word.word)
+                    Text(text = word.meaning)
+                    Text(text = word.example)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            } else {
+                wordOfTheDay?.let { word ->
+                    Text(text = "Word of the Day: ${word.word}")
+                    Text(text = "Meaning: ${word.meaning}")
+                    Text(text = "Example: ${word.example}")
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
         }
     }
 }
+
 
 suspend fun getRandomWord(databaseReference: DatabaseReference): Word? {
     val languages =listOf("chichewa","lomwe","tumbuka")
