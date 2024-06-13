@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
@@ -23,14 +24,19 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlin.random.Random
 
 @Composable
 fun homeTab(navController: NavController, modifier: Modifier, databaseReference: DatabaseReference) {
     var wordOfTheDay by remember { mutableStateOf<Word?>(null) }
+//    var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
+//    var searchResults by remember { mutableStateOf<List<Word>>(emptyList()) }
+
     var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
-    var searchResults by remember { mutableStateOf<List<Word>>(emptyList()) }
+    var searchResults by remember { mutableStateOf(emptyList<Word>()) }
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         wordOfTheDay = getRandomWord(databaseReference)
@@ -50,10 +56,12 @@ fun homeTab(navController: NavController, modifier: Modifier, databaseReference:
 
         OutlinedTextField(
             value = searchQuery,
-            onValueChange = {
-                searchQuery = it
-                searchDatabase(databaseReference, searchQuery.text) { results ->
-                    searchResults = results
+            onValueChange = { newQuery ->
+                searchQuery = newQuery
+                coroutineScope.launch {
+                    searchDatabase(databaseReference, searchQuery.text) { results ->
+                        searchResults = results
+                    }
                 }
             },
             label = { Text("Search") },
@@ -78,11 +86,14 @@ suspend fun getRandomWord(databaseReference: DatabaseReference): Word? {
         val snapshot = databaseReference.child("languages").child(language).child("words").get().await()
         val words = snapshot.children.mapNotNull { it.getValue(Word::class.java) }
         if (words.isNotEmpty()) {
+            Log.d("getRandomWord", "No words found for language $language")
             words[Random.nextInt(words.size)]
         } else {
+            Log.d("getRandomWord", "No words found for language $language")
             null
         }
     } catch (e: Exception) {
+        Log.d("getRandomWord", "Error getting random word for language $language")
         null
     }
 }
@@ -94,16 +105,11 @@ data class Word(
 data class Language(
     val words: List<Word> = emptyList()
 )
-fun searchDatabase(databaseReference: DatabaseReference, query: String, onResult: (List<Word>) -> Unit) {
-    databaseReference.orderByChild("word").startAt(query).endAt("$query\uf8ff")
-        .addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val results = snapshot.children.mapNotNull { it.getValue(Word::class.java) }
-                onResult(results)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle error if needed
-            }
-        })
+suspend fun searchDatabase(databaseReference: DatabaseReference, query: String, onResult: (List<Word>) -> Unit) {
+    val language = listOf("chichewa", "lomwe", "tumbuka")[Random.nextInt(3)]
+    val wordsSnapshot = databaseReference.child("languages").child(language).child("words")
+        .orderByChild("word").equalTo(query).get().await()
+    Log.d("searchDatabase", "Found ${wordsSnapshot.childrenCount} words for language $language")
+    val words = wordsSnapshot.children.mapNotNull { it.getValue(Word::class.java) }
+    onResult(words)
 }
