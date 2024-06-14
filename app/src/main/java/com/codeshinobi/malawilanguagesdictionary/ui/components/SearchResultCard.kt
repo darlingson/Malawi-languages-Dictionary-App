@@ -35,7 +35,7 @@ fun SearchResultCard(
             .height(50.dp)
             .padding(5.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(2.dp),
         onClick = {
             val jsonString = Gson().toJson(word)
             navController.navigate("wordDetail/$jsonString")
