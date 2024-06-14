@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -70,25 +72,25 @@ fun homeTab(navController: NavController, modifier: Modifier, databaseReference:
         if (isLoading) {
             Text(text = "Loading...")
         } else {
-            if (searchResults.isNotEmpty()) {
+            if (searchResults.isNotEmpty() and searchQuery.text.isNotEmpty()) {
                 Text(text = "Search Results")
-                searchResults.forEach { word ->
-//                    Text(text = word.word)
-//                    Text(text = word.meaning)
-//                    Text(text = word.example)
-                    Spacer(modifier = Modifier.height(8.dp))
-                    SearchResultCard(
-                        navController = navController,
-                        word = word,
-                    )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp).verticalScroll(rememberScrollState())
+                ) {
+                    Text(text = "${searchResults.size} results")
+                    searchResults.forEach { word ->
+                        Spacer(modifier = Modifier.height(8.dp))
+                        SearchResultCard(
+                            navController = navController,
+                            word = word,
+                        )
+                    }
                 }
             } else {
                 wordOfTheDay?.let { word ->
                     Text(text = "Word of the Day")
-//                    Text(text = "Word of the Day: ${word.word}")
-//                    Text(text = "Meaning: ${word.meaning}")
-//                    Text(text = "Example: ${word.example}")
-//                    Spacer(modifier = Modifier.height(16.dp))
                     WordOfTheDay(navController, word)
                 }
             }
