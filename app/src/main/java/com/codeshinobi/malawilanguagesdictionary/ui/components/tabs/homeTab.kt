@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.codeshinobi.malawilanguagesdictionary.ui.components.SearchResultCard
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -70,14 +71,20 @@ fun homeTab(navController: NavController, modifier: Modifier, databaseReference:
             Text(text = "Loading...")
         } else {
             if (searchResults.isNotEmpty()) {
+                Text(text = "Search Results")
                 searchResults.forEach { word ->
-                    Text(text = word.word)
-                    Text(text = word.meaning)
-                    Text(text = word.example)
+//                    Text(text = word.word)
+//                    Text(text = word.meaning)
+//                    Text(text = word.example)
                     Spacer(modifier = Modifier.height(8.dp))
+                    SearchResultCard(
+                        navController = navController,
+                        word = word,
+                    )
                 }
             } else {
                 wordOfTheDay?.let { word ->
+                    Text(text = "Word of the Day")
 //                    Text(text = "Word of the Day: ${word.word}")
 //                    Text(text = "Meaning: ${word.meaning}")
 //                    Text(text = "Example: ${word.example}")
